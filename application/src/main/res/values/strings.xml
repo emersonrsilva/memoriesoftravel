@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Memories Of Travel</string>
+    <string name="tabs">Profile,Countries,Countries Visited</string>
+
+</resources>
