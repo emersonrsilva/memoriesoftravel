@@ -1,4 +1,4 @@
-package com.cedro.memoriesoftravel.preseter;
+package com.cedro.memoriesoftravel.presenter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

@@ -1,4 +1,4 @@
-package com.cedro.memoriesoftravel.preseter;
+package com.cedro.memoriesoftravel.presenter;
 
 
 import android.support.v4.view.ViewPager;
