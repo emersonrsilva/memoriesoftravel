@@ -1,5 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Memories Of Travel</string>
-    <string name="tabs">Profile,Countries,Countries Visited</string>
+    <string name="tabs">Home,Countries,Visited Contry</string>
+
 
 </resources>

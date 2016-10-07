@@ -1,59 +1,57 @@
 package com.cedro.memoriesoftravel.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.cedro.memoriesoftravel.R;
-import com.cedro.memoriesoftravel.presenter.MainPresenter;
-
+import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabListener;
+
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+
+import com.cedro.memoriesoftravel.preseter.MainPresenter;
+import com.memoriesoftravel.R;
 
 /**
  * Created by emerson on 06/10/16.
  */
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements MaterialTabListener {
+
+	public ViewPager pager;
+
+	MainPresenter presenter;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.activity_main);
+		presenter = new MainPresenter();
+		presenter.onTakeView(this);
+		presenter.init();
+
+
+	}
 
 
 
-    private static MainPresenter presenter;
+	@Override
+	public void onTabSelected(MaterialTab tab) {
+		// TODO Auto-generated method stub
+		pager.setCurrentItem(tab.getPosition());
+	}
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	@Override
+	public void onTabReselected(MaterialTab tab) {
+		// TODO Auto-generated method stub
 
-        //ListView listView = (ListView)findViewById(R.id.listView);
-        //listView.setAdapter(new ArrayAdapter<>(this, R.layout.item));
+	}
 
-        // Se o presenter não existir, deve ser instanciado
-        if (presenter == null)
-            presenter = new MainPresenter();
+	@Override
+	public void onTabUnselected(MaterialTab tab) {
+		// TODO Auto-generated method stub
 
-        //passa a view para o presenter
-        presenter.onTakeView(this);
-        presenter.initApp();
-    }
+	}
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //remove a view do presenter
-        presenter.onTakeView(null);
-        if (!isChangingConfigurations())
-            presenter = null;
-    }
-
-
-
-
-    public void onItemsError(Throwable throwable) {
-        //exibe um toast com o texto da exception
-        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show();
-    }
 
 
 
