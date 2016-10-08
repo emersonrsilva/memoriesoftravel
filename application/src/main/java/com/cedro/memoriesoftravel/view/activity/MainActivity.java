@@ -3,7 +3,10 @@ package com.cedro.memoriesoftravel.view.activity;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabListener;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 	public ViewPager pager;
 
 	MainPresenter presenter;
+	private BroadcastReceiver activityBroadcast;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +40,21 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
 		presenter = new MainPresenter();
 		presenter.onTakeView(this);
-		presenter.setListener();
-		presenter.init();
+ 		presenter.init();
 
+		activityBroadcast = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				Bundle extras = intent.getExtras();
+				String a = extras.getString("activity");
+				if (a.equals("login")) {
+					Intent newItent = new Intent(MainActivity.this, LoginActivity.class);
+					startActivity(newItent);
+					finish();
+				}
+
+			}
+		};
 
 
 	}
@@ -46,7 +62,18 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 	@Override
 	public void onResume() {
 		super.onResume();
+		IntentFilter filter = new IntentFilter("START_ACTIVITY");
+		registerReceiver(activityBroadcast, filter);
+
 	}
+
+
+	public void onPause()
+	{
+		super.onPause();
+		unregisterReceiver(activityBroadcast);
+	}
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

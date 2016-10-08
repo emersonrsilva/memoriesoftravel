@@ -26,7 +26,6 @@ public class MainPresenter {
     private MainActivity view;
     private String[] tabs = {};
 
-
     Toolbar toolbar;
     MaterialTabHost tabHost;
 
@@ -69,23 +68,5 @@ public class MainPresenter {
             );
         }
     }
-
-    public void setListener(){
-
-
-        view.getApplicationContext().registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Bundle extras = intent.getExtras();
-                String a = extras.getString("activity");
-                if(a.equals("login")){
-                    Intent newItent = new Intent(view, LoginActivity.class);
-                    view.startActivity(newItent);
-                    view.finish();
-                }
-
-            }
-        }, new IntentFilter("START_ACTIVITY"));
-
-    }
 }
+
