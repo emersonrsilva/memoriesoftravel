@@ -22,28 +22,35 @@ import android.widget.ImageView;
 import com.cedro.memoriesoftravel.model.ImageModel;
 import com.cedro.memoriesoftravel.presenter.ImagePreseter;
 import com.memoriesoftravel.R;
+import com.squareup.picasso.Picasso;
 
 
 public class ImageLoader {
     
     public MemoryCache memoryCache=new MemoryCache();
 
-    FileCache fileCache;
+    //FileCache fileCache;
 
-    private Map<ImageView, String> imageViews=Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
+    //private Map<ImageView, String> imageViews=Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
 
-    ExecutorService executorService;
+    //ExecutorService executorService;
 
-    final int logo_se_nao_existir_outra = R.drawable.ic_launcher;
+    //final int logo_se_nao_existir_outra = R.drawable.ic_launcher;
 
+    Context context;
     public ImageLoader(Context context){
-        fileCache=new FileCache(context);
-        executorService=Executors.newFixedThreadPool(5);
+        this.context = context;
+       // fileCache=new FileCache(context);
+        //executorService=Executors.newFixedThreadPool(5);
     }
     
 
-    public void exibirImagem(String url, ImageView imageView)
-    {
+    public void exibirImagem(String url, ImageView imageView) {
+        Picasso.with(context).load(url).into(imageView);
+    }
+    /*
+    public void exibirImagem(String url, ImageView imageView) {
+
         imageViews.put(imageView, url);
 
         //primeiro busca do cache na memoria
@@ -135,5 +142,5 @@ public class ImageLoader {
         memoryCache.clear();
         fileCache.clear();
     }
-
+*/
 }

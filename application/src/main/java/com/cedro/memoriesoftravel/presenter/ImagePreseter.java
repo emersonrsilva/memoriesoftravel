@@ -10,8 +10,8 @@ import com.cedro.memoriesoftravel.util.ImageLoader;
  * Created by emerson on 06/10/16.
  */
 
-public class ImagePreseter implements Runnable {
-    ImageModel imageModel;
+public class ImagePreseter {
+ /*   ImageModel imageModel;
     ImageLoader view;
 
     public ImagePreseter(ImageLoader view, ImageModel imgParaCarregar) {
@@ -60,4 +60,5 @@ public class ImagePreseter implements Runnable {
             }
         }
     }
+    */
 }
