@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cedro.memoriesoftravel.helper.FacebookHelper;
@@ -23,6 +24,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.login.widget.ProfilePictureView;
 import com.memoriesoftravel.R;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -32,7 +34,7 @@ import com.memoriesoftravel.R;
 @SuppressLint("ValidFragment")
 public class HomeFragment extends Fragment{
     private View rootView;
-    private ProfilePictureView profilePictureView;
+    private ImageView profilePictureView;
     private TextView userNameView;
     private Profile profile;
     private Activity mActivity;
@@ -55,14 +57,12 @@ public class HomeFragment extends Fragment{
         info = (TextView) rootView.findViewById(R.id.info);
 
 
-        profilePictureView = (ProfilePictureView) rootView.findViewById(R.id.user_pic);
-        profilePictureView.setCropped(true);
-        profilePictureView.setPresetSize(ProfilePictureView.LARGE);
+        profilePictureView = (ImageView) rootView.findViewById(R.id.user_pic);
         userNameView = (TextView) rootView.findViewById(R.id.user_name);
         profile = FacebookHelper.getLoginInfo();
         if(profile != null){
             userNameView.setText("Bem Vindo!\n"+profile.getFirstName()+" "+profile.getLastName());
-            profilePictureView.setProfileId(profile.getId());
+            Picasso.with(getContext()).load("https://graph.facebook.com/" + profile.getId() + "/picture?type=large").into(profilePictureView);
 
         }
         loginButton.setOnClickListener(new View.OnClickListener() {
