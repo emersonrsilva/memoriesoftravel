@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -101,23 +102,28 @@ public class VisitedCountryPresenter {
 
     //se receber que existe um selecionado nesse momento podemos concluir que nao é necessario percorrer os outros paises para checar se estão marcados
     public void updateMenuSelect(boolean existeAoMenos1Selecionado){
-        if(view.objAdapterHome.countryList == null)
+        if(view == null || view.objAdapterHome == null || view.countryList == null) {
+            Log.v("DELETE_VISITED","VIEW NULL");
             return;
+        }
 
         List<CountryModel> countryList = view.objAdapterHome.countryList;
         int qtdSelected = 0;
 
         if(existeAoMenos1Selecionado){
             qtdSelected = 1;
+            Log.v("DELETE_VISITED","EXISTE AO MENOS 1 SELECIONADO");
         }else {
             for(int i=0;i<countryList.size();i++){
                 CountryModel country = countryList.get(i);
                 if(country.isSelected()){
+                    Log.v("DELETE_VISITED","FOR: processado pais:"+country.getShortname());
                     qtdSelected++;
                 }
             }
         }
 
+        Log.v("DELETE_VISITED","QTD SELECIONADO: "+qtdSelected);
 
         if(qtdSelected > 0){
             if(view.excluirSelecionados == null)
@@ -187,20 +193,26 @@ public class VisitedCountryPresenter {
         view.excluirSelecionados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (view.objAdapterHome.countryList == null)
-                    return;
+                Log.v("DELETE_VISITED","BOTAO EXCLUIR SELECIONADO");
 
+                if (view == null || view.objAdapterHome.countryList == null) {
+                    Log.v("DELETE_VISITED","COUNTRY LIST NULL");
+                    return;
+                }
                 List<CountryModel> countryList = view.objAdapterHome.countryList;
                 for (int i = 0; i < countryList.size(); i++) {
                     CountryModel country = countryList.get(i);
+                    Log.v("DELETE_VISITED","PROCESSADO PAIS:"+country.getShortname());
                     if (country.isSelected()) {
+                        Log.v("DELETE_VISITED",country.getShortname()+":"+(country.isSelected() ? "selected" : "not selected"));
                         country.removeVisit();
-                        SugarRecord.save(country);
+                        SugarRecord.executeQuery("UPDATE COUNTRY_MODEL SET visited = ?, selected = ? WHERE countryid = ?", new String[]{"false","false",String.valueOf(country.getCountryId())});
                     }
                 }
-                loadCountry();
                 updateMenuSelect(false);
                 sendBroadcastReload();
+                loadCountry();
+
 
             }
         });

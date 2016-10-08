@@ -3,6 +3,7 @@ package com.cedro.memoriesoftravel.view.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +96,7 @@ public class VisitedCountryFragmentAdapter extends ArrayAdapter<CountryModel> {
                 Intent intnet = new Intent("CHECK_VISITED");
                 intnet.putExtra("action",b);
                 getContext().sendBroadcast(intnet);
+                Log.v("DELETE_VISITED","Checkbox selecionado");
 
             }
         });

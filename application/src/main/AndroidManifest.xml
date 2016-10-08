@@ -23,7 +23,7 @@
 
         <meta-data android:name="DATABASE" android:value="cedro.db" />
         <meta-data android:name="VERSION" android:value="9" />
-        <meta-data android:name="QUERY_LOG" android:value="false" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
         <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.cedro.memoriesoftravel.model" />
 
 

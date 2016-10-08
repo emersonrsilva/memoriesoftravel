@@ -1,5 +1,8 @@
 package com.cedro.memoriesoftravel.view.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,6 +35,7 @@ public class VisitedCountryFragment extends Fragment {
 	public FloatingActionButton excluirSelecionados;
 	public FloatingActionsMenu fab_menu;
 	public View rootView;
+	private BroadcastReceiver broadCastReceiverVisited;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +66,8 @@ public class VisitedCountryFragment extends Fragment {
 
 		return rootView;
 	}
+
+
 
 	  
 	public void setAdapterToListview() {
