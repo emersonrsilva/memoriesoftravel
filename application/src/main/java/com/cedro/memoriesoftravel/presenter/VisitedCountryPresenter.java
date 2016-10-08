@@ -205,8 +205,8 @@ public class VisitedCountryPresenter {
                     Log.v("DELETE_VISITED","PROCESSADO PAIS:"+country.getShortname());
                     if (country.isSelected()) {
                         Log.v("DELETE_VISITED",country.getShortname()+":"+(country.isSelected() ? "selected" : "not selected"));
-                        country.removeVisit();
-                        SugarRecord.executeQuery("UPDATE COUNTRY_MODEL SET visited = ?, selected = ? WHERE countryid = ?", new String[]{"false","false",String.valueOf(country.getCountryId())});
+                        CountryDao.removeVisit(country);
+
                     }
                 }
                 updateMenuSelect(false);

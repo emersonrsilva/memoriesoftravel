@@ -130,8 +130,7 @@ public class CountryInfoPresenter {
         DialogManager.showCalendarDialog(view,new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker viewDate, int ano, int mes, int dia) {
-                country.markVisited(ano, mes, dia);
-                SugarRecord.save(country);
+                CountryDao.markCountryVisited(country.getCountryId(),ano, mes,  dia);
                 sendBroadcastReload();
 
                 addFloatingMenuOptions();
@@ -143,8 +142,7 @@ public class CountryInfoPresenter {
     }
 
     private void removeVisit() {
-        country.removeVisit();
-        SugarRecord.save(country);
+        CountryDao.removeVisit(country);
         sendBroadcastReload();
     }
 

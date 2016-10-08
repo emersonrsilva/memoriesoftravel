@@ -6,6 +6,7 @@ import android.database.SQLException;
 import com.cedro.memoriesoftravel.model.CountryModel;
 import com.orm.SugarRecord;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,6 +25,16 @@ public class CountryDao {
 
         return tmp;
     }
+
+    public static void markCountryVisited(int id, int ano, int mes, int dia){
+        CountryModel country = getCountryById(id);
+        SugarRecord.executeQuery("UPDATE COUNTRY_MODEL SET dateVisite = ?, visited = ? WHERE countryid = ?", new String[]{
+                dia+"/"+mes+"/"+ano,
+                "true",
+                String.valueOf(country.getCountryId())
+        });
+    }
+
     public static CountryModel getCountryById(int id){
         List<CountryModel> country = SugarRecord.find(CountryModel.class, "countryid = ?", String.valueOf(id));
         if(country.size() > 0)
@@ -39,6 +50,18 @@ public class CountryDao {
 
     }
 
+    public static ArrayList<CountryModel> getAllCountries(){
+        List<CountryModel> country = SugarRecord.find(CountryModel.class, "1");
+        if(country.size() > 0)
+            return new ArrayList<CountryModel>(country);
+        return null;
+
+    }
 
 
+    public static void removeVisit(CountryModel country) {
+        SugarRecord.executeQuery("UPDATE COUNTRY_MODEL SET visited = ?, selected = ? WHERE countryid = ?", new String[]{"false","false",String.valueOf(country.getCountryId())});
+       // country.removeVisit();
+       // SugarRecord.save(country);
+    }
 }
