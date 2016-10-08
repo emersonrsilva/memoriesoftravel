@@ -1,10 +1,14 @@
 package com.cedro.memoriesoftravel.view.adapters;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.cedro.memoriesoftravel.view.fragment.CountryFragment;
+import com.cedro.memoriesoftravel.view.fragment.HomeFragment;
+import com.cedro.memoriesoftravel.view.fragment.VisitedCountryFragment;
+
 
 
 /**
@@ -13,8 +17,11 @@ import com.cedro.memoriesoftravel.view.fragment.CountryFragment;
 
 public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    public MainViewPagerAdapter(FragmentManager fm) {
+    private Activity activity;
+
+    public MainViewPagerAdapter(FragmentManager fm, Activity act) {
         super(fm);
+        this.activity = act;
 
     }
 
@@ -22,11 +29,11 @@ public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (num) {
             case 0:
-                return new CountryFragment();
+                return new HomeFragment(activity);
             case 1:
                 return new CountryFragment();
             case 2:
-                return new CountryFragment();
+                return new VisitedCountryFragment();
 
         }
         return null;

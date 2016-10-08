@@ -1,50 +1,135 @@
 package com.cedro.memoriesoftravel.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+
+import com.cedro.memoriesoftravel.util.Constants;
+import com.orm.SugarRecord;
+import com.orm.dsl.Table;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 /**
  * Created by emerson on 06/10/16.
  */
 
+@Table
 public class CountryModel {
-    private int id;
-    private String nome;
-    private String image;
+    @SerializedName("id")
+    @Expose
+    private int countryid;
 
-    public CountryModel() {
+    private String iso;
+
+    private String shortname;
+
+    private String longname;
+
+    private String callingCode;
+
+    private int status;
+
+    private String culture;
+
+    private String visited = "false";
+
+    private String dateVisite;
+
+
+    private boolean selected;
+
+
+    public void markVisited(int ano, int mes, int dia){
+        this.dateVisite = dia+"/"+mes+1+"/"+ano;
+        this.visited = "true";
     }
 
-    public CountryModel(int id) {
-        this.id=id;
+    public boolean isSelected() {
+        return selected;
     }
 
-    public CountryModel(int id,String nome,String image) {
-        this.id = id;
-        this.nome = nome;
-        this.image = image;
-
-
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
-    public int getId() {
-        return id;
+
+    public void removeVisit() {
+        this.visited = "false";
+    }
+
+    public String getDateVisite() {
+        return dateVisite;
+    }
+
+    public boolean isVisited() {
+        return visited.equals("true");
+    }
+
+    public int getCountryId() {
+        return countryid;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.countryid = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getIso() {
+        return iso;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setIso(String iso) {
+        this.iso = iso;
     }
+
+    public String getShortname() {
+        return shortname;
+    }
+
+    public void setShortname(String shortname) {
+        this.shortname = shortname;
+    }
+
+    public String getLongname() {
+        return longname;
+    }
+
+    public void setLongname(String longname) {
+        this.longname = longname;
+    }
+
+    public String getCallingCode() {
+        return callingCode;
+    }
+
+    public void setCallingCode(String callingCode) {
+        this.callingCode = callingCode;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getCulture() {
+        return culture;
+    }
+
+    public void setCulture(String culture) {
+        this.culture = culture;
+    }
+
     public String getImage() {
-        return image;
+        return Constants.API_FLAGS.replaceAll("COUNTRY_ID",String.valueOf(countryid));
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
 }

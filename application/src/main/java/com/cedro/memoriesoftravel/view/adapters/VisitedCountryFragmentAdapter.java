@@ -2,20 +2,24 @@ package com.cedro.memoriesoftravel.view.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import java.util.List;
-
 import com.cedro.memoriesoftravel.model.CountryModel;
 import com.cedro.memoriesoftravel.util.ImageLoader;
+import com.cedro.memoriesoftravel.view.activity.CountryInfoActivity;
 import com.cedro.memoriesoftravel.view.fragment.CountryFragment;
+import com.cedro.memoriesoftravel.view.fragment.VisitedCountryFragment;
 import com.memoriesoftravel.R;
+
+import java.util.List;
 
 /**
  * Created by emerson on 06/10/16.
@@ -29,11 +33,11 @@ public class VisitedCountryFragmentAdapter extends ArrayAdapter<CountryModel> {
     private int row;
     public ImageLoader imageLoader;
 
-    private CountryFragment view;
-    private List<CountryModel> countryList;
+    private VisitedCountryFragment view;
+    public List<CountryModel> countryList;
     private CountryModel countryModel;
 
-    public VisitedCountryFragmentAdapter(CountryFragment view, int resource, List<CountryModel> countryList) {
+    public VisitedCountryFragmentAdapter(VisitedCountryFragment view, int resource, List<CountryModel> countryList) {
         super(view.getActivity(), resource, countryList);
         this.activity = view.getActivity();
         this.view = view;
@@ -54,7 +58,7 @@ public class VisitedCountryFragmentAdapter extends ArrayAdapter<CountryModel> {
             view = inflater.inflate(row, null);
 
             holder = new VisitedCountryFragmentAdapter.ViewHolder();
-            view.setTag(holder);
+
         } else {
             holder = (VisitedCountryFragmentAdapter.ViewHolder) view.getTag();
         }
@@ -69,11 +73,36 @@ public class VisitedCountryFragmentAdapter extends ArrayAdapter<CountryModel> {
         holder.name=(TextView)view.findViewById(R.id.textView1);
         holder.desc=(TextView)view.findViewById(R.id.textView2);
         holder.imgv_latetst.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
+        holder.checkbox = (CheckBox) view.findViewById(R.id.country_list_item_selectedCheckBox);
         imageLoader.exibirImagem(countryModel.getImage().toString(), holder.imgv_latetst);
         holder.name.setText(countryModel.getShortname().toString()+" - "+countryModel.getIso().toString() );
 
         holder.desc.setText(countryModel.getLongname().toString() );
+        holder.checkbox.setVisibility(View.VISIBLE);
+        view.setTag(holder);
+
+        holder.checkbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBox cb = (CheckBox) view ;
+                CountryModel country = (CountryModel) cb.getTag();
+                country.setSelected(cb.isChecked());
+            }
+        });
+        holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Intent intnet = new Intent("CHECK_VISITED");
+                intnet.putExtra("action",b);
+                getContext().sendBroadcast(intnet);
+
+            }
+        });
+
+        holder.checkbox.setText("");
+        holder.checkbox.setChecked(countryModel.isSelected());
+        holder.checkbox.setTag(countryModel);
+
 
 
         return view;
@@ -84,6 +113,7 @@ public class VisitedCountryFragmentAdapter extends ArrayAdapter<CountryModel> {
 
         public ImageView imgv_latetst;
         public  TextView name,desc;
+        public CheckBox checkbox;
 
     }
 

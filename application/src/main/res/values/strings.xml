@@ -3,6 +3,8 @@
 
     <string name="app_name">Memories Of Travel</string>
     <string name="tabs">Home,Countries,Visited Contry</string>
+    <string name="txt_country_added">Country added to visited list !</string>
+    <string name="facebook_app_id">1787085394872897</string>
 
 
 </resources>

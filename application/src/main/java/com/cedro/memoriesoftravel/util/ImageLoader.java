@@ -14,14 +14,13 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 import com.cedro.memoriesoftravel.model.ImageModel;
-import com.cedro.memoriesoftravel.preseter.ImagePreseter;
+import com.cedro.memoriesoftravel.presenter.ImagePreseter;
 import com.memoriesoftravel.R;
 
 

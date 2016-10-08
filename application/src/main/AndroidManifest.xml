@@ -19,11 +19,18 @@
         android:theme="@style/AppTheme"
         android:name="android.support.multidex.MultiDexApplication"
         >
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <meta-data android:name="DATABASE" android:value="cedro.db" />
+        <meta-data android:name="VERSION" android:value="9" />
+        <meta-data android:name="QUERY_LOG" android:value="false" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.cedro.memoriesoftravel.model" />
+
 
 
 
         <activity
-            android:name="com.cedro.memoriesoftravel.view.activity.MainActivity"
+            android:name="com.cedro.memoriesoftravel.view.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" >
             <intent-filter>
@@ -32,6 +39,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.cedro.memoriesoftravel.view.activity.CountryInfoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name="com.cedro.memoriesoftravel.view.activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
 
 
 

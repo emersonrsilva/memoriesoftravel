@@ -1,12 +1,15 @@
 <resources>
 
-   <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
 
         <item name="android:textColorPrimary">#FFFFFF</item>
        <item name="colorPrimaryDark">@color/m_color_primary_dark</item>
+    </style>
+
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/primary_darker</item>
     </style>
 
 

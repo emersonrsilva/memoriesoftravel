@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,16 +66,25 @@ public class CountryFragmentAdapter  extends ArrayAdapter<CountryModel> {
         countryModel = countryList.get(position);
 
 
+        holder.cb=(CheckBox) view.findViewById(R.id.country_list_item_selectedCheckBox);
         holder.imgv_latetst=(ImageView)view.findViewById(R.id.imageView1);
         holder.name=(TextView)view.findViewById(R.id.textView1);
         holder.desc=(TextView)view.findViewById(R.id.textView2);
         holder.imgv_latetst.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         imageLoader.exibirImagem(countryModel.getImage().toString(), holder.imgv_latetst);
-        holder.name.setText(countryModel.getNome().toString());
+        holder.name.setText(countryModel.getShortname().toString()+" - "+countryModel.getIso().toString() );
 
-        holder.desc.setText(countryModel.getNome().toString());
+        holder.desc.setText(countryModel.getLongname().toString() );
 
+        if(countryModel.isVisited()){
+            holder.cb.setChecked(true);
+            holder.cb.setVisibility(View.VISIBLE);
+        }else {
+            holder.cb.setChecked(false);
+            holder.cb.setVisibility(View.INVISIBLE);
+
+        }
 
         return view;
 
@@ -84,6 +94,7 @@ public class CountryFragmentAdapter  extends ArrayAdapter<CountryModel> {
 
         public ImageView imgv_latetst;
         public  TextView name,desc;
+        public CheckBox cb;
 
     }
 

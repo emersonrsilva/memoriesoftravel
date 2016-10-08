@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/m_tab_clr"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:visibility="visible" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:background="@color/primary"
+            android:gravity="center_vertical"
+            android:id="@+id/imageViewFlag"
+            android:layout_height="204dp" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:paddingLeft="16dp"
+                android:textColor="@color/primary_light"
+                android:layout_gravity="center_vertical"
+                android:paddingTop="8dp"
+                android:textSize="25sp"
+                android:text=""
+                android:id="@+id/txtLongName"
+
+                android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"
+            android:id="@+id/txtShortName"
+            android:text=""
+            android:textColor="@color/primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"
+            android:id="@+id/txtCallCode"
+            android:text=""
+            android:textColor="@color/primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="15sp"
+            android:id="@+id/txtMsg"
+            android:text=""
+            android:textColor="@color/primary" />
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:alpha="1"
+        android:id="@+id/activity_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+    </FrameLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fab_menu"
+        android:layout_gravity="bottom|right"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_width="wrap_content"
+        android:layout_height="134dp"
+
+        fab:fab_addButtonColorNormal="@color/primary"
+        fab:fab_addButtonColorPressed="@color/primary_dark"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_addButtonStrokeVisible="false"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="left"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/activity_layout"
+        android:layout_alignEnd="@+id/activity_layout">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnMarcarVisita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_addButtonColorNormal="@color/primary"
+            fab:fab_addButtonColorPressed="@color/primary_dark"
+            fab:fab_plusIconColor="@color/white"
+            fab:fab_icon="@drawable/ic_launcher"
+            fab:fab_size="mini"
+            fab:fab_title="Visitei!" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnRemoverVisita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_addButtonColorNormal="@color/primary"
+            fab:fab_addButtonColorPressed="@color/primary_dark"
+            fab:fab_plusIconColor="@color/white"
+            fab:fab_icon="@drawable/ic_launcher"
+            fab:fab_size="mini"
+            fab:fab_title="Remover Visita" />
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+</RelativeLayout>

@@ -35,19 +35,19 @@ public class MainPresenter {
         toolbar.setTitle(view.getString(R.string.app_name));
         view.setSupportActionBar(toolbar);
 
+        view.getSupportActionBar().setDisplayHomeAsUpEnabled(true);//
 
 
 
         tabHost = (MaterialTabHost) view.findViewById(R.id.tabHost);
         view.pager = (ViewPager) view.findViewById(R.id.pager );
 
-        MainViewPagerAdapter adapter = new MainViewPagerAdapter(view.getSupportFragmentManager());
+        MainViewPagerAdapter adapter = new MainViewPagerAdapter(view.getSupportFragmentManager(),view);
         view.pager.setAdapter(adapter);
 
         view.pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                // when user do a swipe the selected tab change
                 tabHost.setSelectedNavigationItem(position);
 
             }

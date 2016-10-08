@@ -5,6 +5,11 @@
     <color name="m_tab_select_clr">#3C8F9D</color>
     <color name="divider">#E7E7E7</color>
     <color name="app_background">#E7E7E7</color>
+    <color name="primary">#03A9F4</color>
+    <color name="primary_light">#B3E5FC</color>
+
+    <color name="primary_dark">#0288D1</color>
+    <color name="primary_darker">#025fd1</color>
 
 
     <color name="black">#000000</color>

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.cedro.memoriesoftravel"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode 15
         versionName "15"
@@ -38,6 +38,10 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.koushikdutta.ion:ion:2.1.7'
     compile 'com.birbit:android-priority-jobqueue:2.0.0'
-
+    compile 'com.github.satyan:sugar:1.4'
+    compile 'com.getbase:floatingactionbutton:1.10.0'
+    compile 'com.bignerdranch.android:recyclerview-multiselect:0.2'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.sromku:simple-fb:4.1.1'
 
 }
