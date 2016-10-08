@@ -42,11 +42,12 @@ public class CountryModel {
     private String dateVisite;
 
 
-    private boolean selected;
+    private boolean selected = false;
 
 
     public void markVisited(int ano, int mes, int dia){
-        this.dateVisite = dia+"/"+mes+1+"/"+ano;
+        mes++;
+        this.dateVisite = dia+"/"+mes+"/"+ano;
         this.visited = "true";
     }
 
@@ -61,6 +62,7 @@ public class CountryModel {
 
     public void removeVisit() {
         this.visited = "false";
+        this.selected = false;
     }
 
     public String getDateVisite() {

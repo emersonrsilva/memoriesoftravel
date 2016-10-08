@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment{
         userNameView = (TextView) rootView.findViewById(R.id.user_name);
         profile = FacebookHelper.getLoginInfo();
         if(profile != null){
-            userNameView.setText(profile.getFirstName());
+            userNameView.setText("Bem Vindo!\n"+profile.getFirstName()+" "+profile.getLastName());
             profilePictureView.setProfileId(profile.getId());
 
         }
@@ -80,10 +80,16 @@ public class HomeFragment extends Fragment{
     }
 
     private void gotoLogin() {
-        Intent intent = new Intent(rootView.getContext(), HomeFragment.class);
+        // Como chamar a intent a partir de um fragment pode causar crash no aplicativo,
+        // eu resolvi usar Broadcast para a MainActivity e ela exibir o login
+        // DESCULPE :(
+        /*
+        Intent intent = new Intent(mActivity, HomeFragment.class);
         startActivity(intent);
-        mActivity.finish();
-
+        mActivity.finish();*/
+        Intent intnet = new Intent("START_ACTIVITY");
+        intnet.putExtra("activity", "login");
+        getContext().sendBroadcast(intnet);
     }
 
     @Override

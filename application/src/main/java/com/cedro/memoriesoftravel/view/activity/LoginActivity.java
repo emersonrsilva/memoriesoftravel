@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onCancel() {
-                deslogar();
+                deslogar(true);
             }
 
             @Override
@@ -75,26 +75,27 @@ public class LoginActivity extends Activity {
 
         if(sharedPresences.getBoolean("logado",false)){
             AccessToken token = AccessToken.getCurrentAccessToken();
-            if(token != null && !token.isExpired())
+            if(token != null && !token.isExpired()) {
                 autenticar(token);
-            else
-                deslogar();
-
+                return;
+            }
         }
 
-
+        deslogar(false);
     }
 
-    private void deslogar() {
-        preferencesEditor.putBoolean("logged", false);
+    private void deslogar(boolean recreate) {
+        preferencesEditor.putBoolean("logado", false);
         preferencesEditor.putString("token", null);
         preferencesEditor.apply();
-        this.recreate();
+
+        if(recreate)
+            this.recreate();
 
     }
 
     private void autenticar(AccessToken token) {
-        preferencesEditor.putBoolean("logged", true);
+        preferencesEditor.putBoolean("logado", true);
         preferencesEditor.putString("token", token.getToken());
         preferencesEditor.apply();
         exibirMain();

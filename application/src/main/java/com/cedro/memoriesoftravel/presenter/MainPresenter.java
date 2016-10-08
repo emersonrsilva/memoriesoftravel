@@ -1,9 +1,16 @@
 package com.cedro.memoriesoftravel.presenter;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
+import com.cedro.memoriesoftravel.view.activity.LoginActivity;
 import com.cedro.memoriesoftravel.view.activity.MainActivity;
 import com.cedro.memoriesoftravel.view.adapters.MainViewPagerAdapter;
 import com.memoriesoftravel.R;
@@ -63,4 +70,22 @@ public class MainPresenter {
         }
     }
 
+    public void setListener(){
+
+
+        view.getApplicationContext().registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                String a = extras.getString("activity");
+                if(a.equals("login")){
+                    Intent newItent = new Intent(view, LoginActivity.class);
+                    view.startActivity(newItent);
+                    view.finish();
+                }
+
+            }
+        }, new IntentFilter("START_ACTIVITY"));
+
+    }
 }

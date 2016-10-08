@@ -101,7 +101,10 @@ public class VisitedCountryPresenter {
 
     //se receber que existe um selecionado nesse momento podemos concluir que nao é necessario percorrer os outros paises para checar se estão marcados
     public void updateMenuSelect(boolean existeAoMenos1Selecionado){
-                List<CountryModel> countryList = view.objAdapterHome.countryList;
+        if(view.objAdapterHome.countryList == null)
+            return;
+
+        List<CountryModel> countryList = view.objAdapterHome.countryList;
         int qtdSelected = 0;
 
         if(existeAoMenos1Selecionado){
@@ -167,7 +170,6 @@ public class VisitedCountryPresenter {
         view.fab_menu.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
             public void onMenuExpanded() {
-                view.rootView.getBackground().setAlpha(240);
                 view.rootView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -179,26 +181,36 @@ public class VisitedCountryPresenter {
 
             @Override
             public void onMenuCollapsed() {
-                view.rootView.getBackground().setAlpha(0);
                 view.rootView.setOnTouchListener(null);
             }
         });
         view.excluirSelecionados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (view.objAdapterHome.countryList == null)
+                    return;
+
                 List<CountryModel> countryList = view.objAdapterHome.countryList;
-                for(int i=0;i<countryList.size();i++){
+                for (int i = 0; i < countryList.size(); i++) {
                     CountryModel country = countryList.get(i);
-                    if(country.isSelected()){
+                    if (country.isSelected()) {
                         country.removeVisit();
                         SugarRecord.save(country);
                     }
                 }
                 loadCountry();
                 updateMenuSelect(false);
+                sendBroadcastReload();
 
             }
         });
+    }
+
+    private void sendBroadcastReload() {
+        Intent intnet = new Intent("RELOAD_VISITED");
+        intnet.putExtra("action", "reload");
+        view.getContext().sendBroadcast(intnet);
 
     }
+
 }

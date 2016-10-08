@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity implements MaterialTabListen
 
 		presenter = new MainPresenter();
 		presenter.onTakeView(this);
+		presenter.setListener();
 		presenter.init();
+
 
 
 	}

@@ -100,6 +100,7 @@ public class VisitedCountryFragmentAdapter extends ArrayAdapter<CountryModel> {
         });
 
         holder.checkbox.setText("");
+        holder.checkbox.setClickable(true);
         holder.checkbox.setChecked(countryModel.isSelected());
         holder.checkbox.setTag(countryModel);
 
