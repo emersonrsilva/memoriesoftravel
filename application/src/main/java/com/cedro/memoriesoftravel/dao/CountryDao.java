@@ -15,20 +15,24 @@ import java.util.List;
  */
 
 public class CountryDao {
+
+    public CountryModel add(CountryModel model){
+        SugarRecord.save(model);
+        return model;
+    }
+
     public CountryModel addIfNotExists(final CountryModel mModel){
         // salvar no banco caso nao exista
         CountryModel tmp =  getCountryById(mModel.getCountryId());
         if(tmp == null) {
-            SugarRecord.save(mModel);
-            return mModel;
+            return add(mModel);
         }
-
         return tmp;
     }
 
     public static void markCountryVisited(int id, int ano, int mes, int dia){
         CountryModel country = getCountryById(id);
-        SugarRecord.executeQuery("UPDATE COUNTRY_MODEL SET dateVisite = ?, visited = ? WHERE countryid = ?", new String[]{
+        SugarRecord.executeQuery("UPDATE COUNTRY_MODEL SET datevisite = ?, visited = ? WHERE countryid = ?", new String[]{
                 dia+"/"+mes+"/"+ano,
                 "true",
                 String.valueOf(country.getCountryId())
@@ -51,7 +55,7 @@ public class CountryDao {
     }
 
     public static ArrayList<CountryModel> getAllCountries(){
-        List<CountryModel> country = SugarRecord.find(CountryModel.class, "1");
+        List<CountryModel> country = SugarRecord.listAll(CountryModel.class);
         if(country.size() > 0)
             return new ArrayList<CountryModel>(country);
         return null;
