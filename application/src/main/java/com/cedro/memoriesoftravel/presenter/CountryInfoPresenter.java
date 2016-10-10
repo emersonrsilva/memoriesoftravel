@@ -1,12 +1,17 @@
 package com.cedro.memoriesoftravel.presenter;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,6 +72,7 @@ public class CountryInfoPresenter {
 
     public void addFloatingMenuListener() {
         final FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.activity_layout);
+
         view.fabMenu.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
             public void onMenuExpanded() {
@@ -86,6 +92,42 @@ public class CountryInfoPresenter {
                 frameLayout.setOnTouchListener(null);
             }
         });
+
+        view.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.fabMenu.collapse();
+
+                LayoutInflater layoutInflater = LayoutInflater.from(view);
+                View promptView = layoutInflater.inflate(R.layout.dialog_new_name, null);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view);
+                alertDialogBuilder.setView(promptView);
+
+                final EditText name = (EditText) promptView.findViewById(R.id.countryNewName);
+
+                alertDialogBuilder.setCancelable(false)
+                        .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                String newName = name.getText().toString();
+                                CountryDao.editCountryName(country.getCountryId(),newName);
+                                updateInfoInViews();
+                                dialog.dismiss();
+
+                            }
+                        })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                AlertDialog alert = alertDialogBuilder.create();
+                alert.show();
+
+            }
+        });
+
         view.btnMarcarVisita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +140,6 @@ public class CountryInfoPresenter {
             public void onClick(View v) {
                 view.fabMenu.collapse();
                 removeVisit();
-                addFloatingMenuOptions();
             }
         });
     }
@@ -112,7 +153,9 @@ public class CountryInfoPresenter {
         view.tCallCode = (TextView) view.findViewById(R.id.txtCallCode);
         view.btnMarcarVisita = (FloatingActionButton) view.findViewById(R.id.btnMarcarVisita);
         view.btnRemoverVisita = (FloatingActionButton) view.findViewById(R.id.btnRemoverVisita);
+        view.btnEditar = (FloatingActionButton) view.findViewById(R.id.btnEditar);
         view.txtMsg= (TextView) view.findViewById(R.id.txtMsg);
+
     }
 
     public void addFloatingMenuOptions() {
@@ -131,9 +174,7 @@ public class CountryInfoPresenter {
 
             public void onDateSet(DatePicker viewDate, int ano, int mes, int dia) {
                 CountryDao.markCountryVisited(country.getCountryId(),ano, mes,  dia);
-                sendBroadcastReload();
-
-                addFloatingMenuOptions();
+                updateInfoInViews();
                 DialogManager.showToast(view,viewDate.getResources().getString(R.string.txt_country_added));
 
             }
@@ -143,13 +184,20 @@ public class CountryInfoPresenter {
 
     private void removeVisit() {
         CountryDao.removeVisit(country);
-        sendBroadcastReload();
+        updateInfoInViews();
     }
 
     private void sendBroadcastReload(){
        Intent intnet = new Intent("RELOAD_VISITED");
         intnet.putExtra("action","reload");
        view.sendBroadcast(intnet);
+
+    }
+
+    private void updateInfoInViews(){
+        sendBroadcastReload();
+        loadCountryInfo();
+        addFloatingMenuOptions();
 
     }
 }

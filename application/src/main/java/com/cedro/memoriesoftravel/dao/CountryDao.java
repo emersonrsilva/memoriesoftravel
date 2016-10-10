@@ -30,6 +30,17 @@ public class CountryDao {
         return tmp;
     }
 
+    public static void editCountryName(int id, String newName){
+        CountryModel country = getCountryById(id);
+
+        SugarRecord.executeQuery("UPDATE COUNTRY_MODEL SET longname = ?, shortname = ? WHERE countryid = ?", new String[]{
+                newName,
+                newName,
+                String.valueOf(country.getCountryId())
+        });
+
+    }
+
     public static void markCountryVisited(int id, int ano, int mes, int dia){
         CountryModel country = getCountryById(id);
         SugarRecord.executeQuery("UPDATE COUNTRY_MODEL SET datevisite = ?, visited = ? WHERE countryid = ?", new String[]{

@@ -31,6 +31,7 @@ public class CountryInfoActivity extends ActionBarActivity {
 	public TextView tLongName;
 	public TextView tShortName;
 	public TextView tCallCode;
+	public FloatingActionButton btnEditar;
 	public FloatingActionButton btnMarcarVisita;
 	public FloatingActionButton btnRemoverVisita;
 	public TextView txtMsg;
