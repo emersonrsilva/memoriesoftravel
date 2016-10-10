@@ -3,7 +3,6 @@ Welcome to Memories of Travel!
 
 
 Hey! I'm a simple app for you to get information and select which **countries** you've visited
-
 ----------
 
 Libraries used on the simple project
@@ -19,7 +18,7 @@ Libraries used on the simple project
 
 References
 -------------
-
+* Android MVP [ http://antonioleiva.com/mvp-android/ ]
 * Facebook Login [ https://developers.facebook.com/docs/facebook-login/android#addbutton ]
 * Order ArrayList Alfabetically  [ http://stackoverflow.com/questions/1814095/sorting-an-arraylist-of-contacts-based-on-name/37077669#37077669 ]
 *  SugarORM [ http://satyan.github.io/sugar ]
