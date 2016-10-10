@@ -6,7 +6,7 @@ Hey! I'm a simple app for you to get information and select which **countries** 
 
 ----------
 
-Libraries used on the sample project
+Libraries used on the simple project
 ------------------------------------
 * AppCompat, CardView, RecyclerView and DesignLibrary
 * MaterialTabs
