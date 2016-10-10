@@ -41,7 +41,7 @@ public class MainPresenter {
         toolbar.setTitle(view.getString(R.string.app_name));
         view.setSupportActionBar(toolbar);
 
-        view.getSupportActionBar().setDisplayHomeAsUpEnabled(true);//
+        view.getSupportActionBar().setDisplayHomeAsUpEnabled(false);//
 
 
 
